@@ -10,7 +10,9 @@ describe BookMarks do
 
   describe '#all' do
     it 'shows the hardcoded array' do
-      expect(BookMarks.all).to eq (['Google', 'Facebook', 'Youtube'])
+      expect(BookMarks.all).to include ('http://www.makersacademy.com/')
+      expect(BookMarks.all).to include ('http://www.google.com/')
+      expect(BookMarks.all).to include ('http://www.destroyallsoftware.com')
     end
   end
 end

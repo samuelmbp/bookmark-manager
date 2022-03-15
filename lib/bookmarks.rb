@@ -1,3 +1,5 @@
+require 'pg'
+
 class BookMarks
   attr_reader :list
 
@@ -6,6 +8,10 @@ class BookMarks
   end
 
   def self.all
-    return ['Google', 'Facebook', 'Youtube'] 
+    conn = PG.connect( dbname: 'bookmark_manager' )
+    result = conn.exec('SELECT * FROM bookmarks;')
+    result.map { |bookmark| bookmark['url']}
   end 
 end
+
+# http://www.destroyallsoftware.com
