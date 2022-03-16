@@ -7,11 +7,14 @@ class BookMarks
     @list = list
   end
 
-  def self.all
-    conn = PG.connect( dbname: 'bookmark_manager' )
-    result = conn.exec('SELECT * FROM bookmarks;')
-    result.map { |bookmark| bookmark['url']}
-  end 
-end
+  def self.all(production_db='bookmark_manager')
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG.connect(dbname: 'bookmark_manager_test')
+    else
+      connection = PG.connect( dbname: production_db )
+    end
 
-# http://www.destroyallsoftware.com
+    result = connection.exec('SELECT * FROM bookmarks;')
+    result.map { |bookmark| bookmark['url']}
+  end
+end
