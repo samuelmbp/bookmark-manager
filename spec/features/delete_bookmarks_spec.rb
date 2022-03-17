@@ -7,11 +7,12 @@ feature 'Delete bookmarks' do
     fill_in('title', with: 'Makers Academy')
     fill_in('url',  with: 'http://www.makersacademy.com/')
     click_button 'Add Bookmark'
-    expect(page).to has_link?('Makers Academy', href: 'http://www.makersacademy.com/')
+
+    expect(page).to have_link('Makers Academy', href: 'http://www.makersacademy.com/')
 
     #deleting the bookmark created by create bookmark
     fill_in 'title', with: 'Makers Academy'
     click_button 'Delete Bookmark'
-    expect(page).to has_no_link?('Makers Academy', href: 'http://www.makersacademy.com/')
+    expect(page).to have_no_link('Makers Academy', href: 'http://www.makersacademy.com/')
   end
 end
