@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-require './lib/bookmarks'
+require './lib/bookmark'
 
 class BookmarkManager < Sinatra::Base
   configure :development do
@@ -8,11 +8,16 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    erb :create_bookmark
+  end
+
+  post '/bookmarks' do
+    BookMark.create(url: params['url'], title: params['title'])
+    redirect '/bookmarks'
   end
 
   get '/bookmarks' do
-    @bookmarks = BookMarks.all
+    @bookmarks = BookMark.all
     erb :bookmarks
   end
 

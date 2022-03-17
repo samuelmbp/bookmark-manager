@@ -1,28 +1,35 @@
-require 'bookmarks'
-describe BookMarks do
-  subject(:bookmarks) {described_class.new}
-  
-  describe '#new' do
-    it 'returns an empty array' do
-      expect(bookmarks.list).to eq []
-    end
-  end
+require 'bookmark'
+require 'database_helper'
+
+describe BookMark do
 
   describe '#all' do
     it 'returns the list with the bookmarks' do
-      # Test DB
+      # Test Database
       connection = PG.connect(dbname: 'bookmark_manager_test')
 
-      connection.exec("INSERT INTO bookmarks(url) VALUES('http://www.makersacademy.com/')")
-      connection.exec("INSERT INTO bookmarks(url) VALUES('http://www.google.com/')")
-      connection.exec("INSERT INTO bookmarks(url) VALUES('http://www.destroyallsoftware.com')")
+      # Addind test data
+      BookMark.create(url: 'http://www.makersacademy.com/', title: 'Makers Academy')
+      BookMark.create(url: 'http://www.destroyallsoftware.com', title: 'Destroy All Software')
+      BookMark.create(url: 'http://www.google.com/', title: 'Google')
 
-      # Production DB
-      bookmarks = BookMarks.all()
-      
-      expect(bookmarks).to include ('http://www.makersacademy.com/')
-      expect(bookmarks).to include ('http://www.google.com/')
-      expect(bookmarks).to include ('http://www.destroyallsoftware.com')
+      # Production database
+      bookmarks = BookMark.all   
+      expect(bookmarks.first).to be_a BookMark   
+      expect(bookmarks.first.title).to eq 'Makers Academy'
+      expect(bookmarks.first.url).to eq 'http://www.makersacademy.com/'
+    end
+  end
+
+  describe '#create' do
+    it 'creates a new bookmark' do
+        bookmark = BookMark.create(url: 'http://www.makersacademy.com/', title: 'Makers Academy')
+        persisted_data = persisted_data(id: bookmark.id)
+
+        expect(bookmark).to be_a BookMark
+        expect(bookmark.id).to eq persisted_data['id']
+        expect(bookmark.title).to eq 'Makers Academy'
+        expect(bookmark.url).to eq 'http://www.makersacademy.com/'
     end
   end
 end
