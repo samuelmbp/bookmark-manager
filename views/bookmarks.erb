@@ -5,9 +5,12 @@
 
 <ul>
   <% @bookmarks.each do |bookmark| %>
-  <li><a href='<%= bookmark.url %>'><%= bookmark.title %></a></li>
+  <li>
+    <a href="<%= bookmark.url %>" target="_blank">
+     <%= bookmark.title %>
+    </a>
+  </li>
   <% end %>
 </ul>
-
 
 <a href='/'>Back home</a>

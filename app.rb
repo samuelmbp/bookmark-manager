@@ -21,7 +21,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/delete_bookmark' do
-    p 'BEFORE DELETING'
+    p 'SUCCESSFULLY DELETED'
     BookMark.delete(title: params['title'])
     redirect '/bookmarks'
   end

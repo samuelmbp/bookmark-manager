@@ -1,5 +1,5 @@
 feature 'Delete bookmarks' do
-  scenario 'Delete a bookmark' do
+  scenario 'User can delete a bookmark' do
     visit '/'
 
     #create bookmark test to setup a bookmark
@@ -13,6 +13,6 @@ feature 'Delete bookmarks' do
     #deleting the bookmark created by create bookmark
     fill_in 'title', with: 'Makers Academy'
     click_button 'Delete Bookmark'
-    expect(page).to have_no_link('Makers Academy', href: 'http://www.makersacademy.com/')
+    expect(page).not_to have_link('Makers Academy', href: 'http://www.makersacademy.com/')
   end
 end
