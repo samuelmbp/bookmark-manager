@@ -35,8 +35,15 @@ So my bookmarks are private
 I would like to only see my bookmars
 ```
 
-## PostgreSQL Instructions
+## Setting up the database
 1. Connect to psql
 2. Create the database using the psql command CREATE DATABASE bookmark_manager;
-3. Connect to the database using the pqsl command \c bookmark_manager;
-4. Run the query we have saved in the file ```01_create_bookmarks_table.sql```
+3. Connect to the production database using the pqsl command \c bookmark_manager;
+4. Run the queries saved in the db/migration folder
+
+
+## How to run the tests
+1. Clone this repository
+2. ```cd``` into the cloned directory
+3. Run ```bundle``` to install the dependencies
+4. Run ```rspec```
