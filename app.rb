@@ -11,12 +11,18 @@ class BookmarkManager < Sinatra::Base
     erb :index
   end
 
+  
   post '/create_bookmark' do
     redirect '/create_bookmark'
   end
 
   get '/create_bookmark' do
     erb :create_bookmark
+  end
+
+  post '/delete_bookmark' do
+    BookMark.delete(title: params['title'])
+    redirect '/bookmarks'
   end
 
   post '/bookmarks' do

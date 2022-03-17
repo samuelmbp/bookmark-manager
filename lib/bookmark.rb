@@ -33,6 +33,8 @@ class BookMark
     BookMark.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
   end
 
+  
+
   # private
 
   # def database_connection(production_db)

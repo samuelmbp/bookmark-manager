@@ -1,5 +1,13 @@
+<form action='/delete_bookmark', method='POST'>
+  <input type='text' name='title' placeholder='Add title...' />
+  <button type='submit' name='Delete Bookmark'>Delete Bookmark</button>
+</form>
+
 <ul>
   <% @bookmarks.each do |bookmark| %>
   <li><a href='<%= bookmark.url %>'><%= bookmark.title %></a></li>
   <% end %>
 </ul>
+
+
+<a href='/'>Back home</a>
