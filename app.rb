@@ -8,6 +8,14 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/' do
+    erb :index
+  end
+
+  post '/create_bookmark' do
+    redirect '/create_bookmark'
+  end
+
+  get '/create_bookmark' do
     erb :create_bookmark
   end
 
